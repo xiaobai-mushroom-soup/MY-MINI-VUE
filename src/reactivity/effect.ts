@@ -24,10 +24,18 @@ export function track(target, key) {
   let dep = depsMap.get(key);
   if (!dep) {
     dep = new Set();
-    depsMap.set(key,dep)
+    depsMap.set(key, dep);
   }
 
   dep.add(activeEffect);
+}
+
+export function trigger(target, key) {
+  let depsMap = targetMap.get(target);
+  let dep = depsMap.get(key);
+  for (const effect of dep) {
+    effect.run();
+  }
 }
 
 let activeEffect;
