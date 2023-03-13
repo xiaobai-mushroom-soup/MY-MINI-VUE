@@ -32,6 +32,7 @@ export const readonlyHandlers = {
   get: readonlyGet,
   set(target, key, value) {
     // 给出警告
+    console.warn(`key:${key} set 失败 因为 target 是 readonly`)
     return true;
   },
 };
